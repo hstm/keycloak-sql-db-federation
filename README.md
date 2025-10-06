@@ -113,32 +113,32 @@ Just add a mapper to client mappers with the same name as the returned column al
 
 ## Build
 
-    Before running the application, you need to configure `src/main/resources/application.properties` to match your environment. Update database credentials, ports, and other settings as needed. 
+Before running the application, you need to configure `src/main/resources/application.properties` to match your environment. Update database credentials, ports, and other settings as needed. 
 
-    - mvn clean package
+    mvn clean package
 
-    or if you want to use mvn wrapper:
+or if you want to use mvn wrapper:
 
-    - mvn wrapper:wrapper
-    - ./mvnw clean package
+    mvn wrapper:wrapper
+    ./mvnw clean package
 
 
 ## Deployment
 
-    1) Copy every  `.jar` from dist/ folder  to  /providers folder under your keycloak installation root.
-        - i.e, on a default keycloak setup, copy all  `.jar` files to <keycloak_root_dir>/providers
-    2) run :
-        $ ./bin/kc.sh start-dev
-    OR if you are using a production configuration:
-        $ ./bin/kc.sh build
-        $ ./bin/kc.sh start
+1) Copy every  `.jar` from dist/ folder  to  /providers folder under your keycloak installation root.
+    - i.e, on a default keycloak setup, copy all  `.jar` files to <keycloak_root_dir>/providers
+2) run :
+    $ ./bin/kc.sh start-dev
+OR if you are using a production configuration:
+    $ ./bin/kc.sh build
+    $ ./bin/kc.sh start
 
 ## For further information, see:
 
-    - https://www.keycloak.org/docs/latest/server_development/#packaging-and-deployment
+- https://www.keycloak.org/docs/latest/server_development/#packaging-and-deployment
 
-    [!IMPORTANT]
-    Before running the application, you need to configure `src/main/resources/application.properties` to match your environment. Update database credentials, ports, and other settings as needed (e. g. CORS). 
+[!IMPORTANT]
+Before running the application, you need to configure `src/main/resources/application.properties` to match your environment. Update database credentials, ports, and other settings as needed (e. g. CORS). 
 
 # Docker setup (for development purposes only)
 
