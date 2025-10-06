@@ -18,7 +18,7 @@ Keycloak User Storage SPI for Relational Databases (Keycloak User Federation, su
 - Keycloak 25.0.x
 - Docker 4.10+
 - OpenJDK 17+
-- Maven 3.9.5
+- Maven 3.8.7+
 
 ## Usage
 
@@ -122,6 +122,16 @@ or if you want to use mvn wrapper:
     mvn wrapper:wrapper
     ./mvnw clean package
 
+>[!CAUTION]
+>Password encryption and verification in utils/AuthCredentials.java are requirements from an older customer project. They must be replaced with modern and more secure methods (e.g., bcrypt, Argon2id) before production use.
+
+#### Reasons why the current implementation is bad and/or dangerous:
+- Wrong tool for the job: This uses general-purpose hash functions (like SHA-256/SHA-512) which are designed to be fast. For password hashing, you want algorithms that are intentionally slow to resist brute-force attacks.
+- Insufficient iteration count: 1024 iterations is far too low by modern standards. NIST recommends at least 10,000 iterations for PBKDF2, and that was years ago.
+- Naive iteration implementation: The code iterates by hashing hash + salt repeatedly, which is not the same as proper key derivation. This pattern doesn't provide the same security properties as standardized KDFs.
+- No memory hardness: Algorithms like bcrypt and Argon2 use significant memory, making them resistant to GPU/ASIC attacks. Your implementation uses negligible memory.
+- Configuration flexibility is dangerous: Allowing hashingAlgorithm as a parameter means someone could accidentally use MD5 or SHA-1.
+
 
 ## Deployment
 
@@ -137,8 +147,8 @@ OR if you are using a production configuration:
 
 - https://www.keycloak.org/docs/latest/server_development/#packaging-and-deployment
 
-[!IMPORTANT]
-Before running the application, you need to configure `src/main/resources/application.properties` to match your environment. Update database credentials, ports, and other settings as needed (e. g. CORS). 
+>[!IMPORTANT]
+>Before running the application, you need to configure `src/main/resources/application.properties` to match your environment. Update database credentials, ports, and other settings as needed (e. g. CORS). 
 
 # Docker setup (for development purposes only)
 
