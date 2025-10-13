@@ -2,7 +2,7 @@
 
 ### Compatible with Keycloak 25.0.x+ Quarkus based.
 
-Keycloak User Storage SPI for Relational Databases (Keycloak User Federation, supports postgresql, mysql, oracle and mysql).
+Keycloak User Storage SPI for Relational Databases (Keycloak User Federation, supports postgresql, mysql, oracle and mssql).
 
 - Keycloak User federation provider with SQL
 - Keycloak User federation using existing database
